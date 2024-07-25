@@ -1,0 +1,30 @@
+<!-- Adicione isso no topo do seu HTML -->
+<mat-toolbar color="primary">
+    <span>Overlay</span>
+  </mat-toolbar>
+<section class="register-container">
+    <h2>Cadastro</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div *ngFor="let field of fields">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ field.label }}</mat-label>
+          <ng-container [ngSwitch]="field.type">
+            <!-- Para campos de texto -->
+            <input *ngSwitchCase="'text'" matInput [id]="field.name" [(ngModel)]="data[field.name]" [name]="field.name" [required]="field.required">
+            <!-- Para campos de número -->
+            <input *ngSwitchCase="'number'" matInput [id]="field.name" [(ngModel)]="data[field.name]" [name]="field.name" [required]="field.required">
+            <!-- Para campos de data -->
+            <input *ngSwitchCase="'date'" matInput [id]="field.name" [(ngModel)]="data[field.name]" [name]="field.name" [required]="field.required">
+            <!-- Para campos de seleção -->
+            <mat-select *ngSwitchCase="'select'" [id]="field.name" [(ngModel)]="data[field.name]" [name]="field.name" [required]="field.required">
+              <mat-option *ngFor="let option of field.options" [value]="option">{{ option }}</mat-option>
+            </mat-select>
+          </ng-container>
+          <mat-hint *ngIf="field.hint">{{ field.hint }}</mat-hint>
+          <mat-error *ngIf="field.required && !data[field.name]">Este campo é obrigatório.</mat-error>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" type="submit">Salvar</button>
+    </form>
+  </section>
+  
