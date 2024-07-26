@@ -1,0 +1,22 @@
+<!-- Adicione isso no topo do seu HTML -->
+<mat-toolbar color="primary">
+    <span>MKS - Soluções Integradas</span>
+  </mat-toolbar>
+<section class="login-container">
+    <form (ngSubmit)="onSubmit()">
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>ID</mat-label>
+          <input matInput type="text" id="userId" [(ngModel)]="userId" name="userId" required>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Senha</mat-label>
+          <input matInput type="password" id="password" [(ngModel)]="password" name="password" required>
+        </mat-form-field>
+      </div>
+      <button mat-flat-button color="primary" type="submit">Login</button>
+    </form>
+  </section>
+  
