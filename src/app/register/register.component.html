@@ -1,8 +1,9 @@
 <!-- Adicione isso no topo do seu HTML -->
 <mat-toolbar color="primary">
-    <span>Overlay</span>
+    <span>MKS</span>
   </mat-toolbar>
-<section class="register-container">
+  
+  <section class="register-container">
     <h2>Cadastro</h2>
     <form (ngSubmit)="onSubmit()">
       <div *ngFor="let field of fields">
@@ -14,7 +15,16 @@
             <!-- Para campos de número -->
             <input *ngSwitchCase="'number'" matInput [id]="field.name" [(ngModel)]="data[field.name]" [name]="field.name" [required]="field.required">
             <!-- Para campos de data -->
-            <input *ngSwitchCase="'date'" matInput [id]="field.name" [(ngModel)]="data[field.name]" [name]="field.name" [required]="field.required">
+            <ng-container *ngSwitchCase="'date'">
+              <div class="date-field-container">
+                <mat-form-field appearance="fill">
+                  <mat-label>{{ field.label }}</mat-label>
+                  <input matInput [matDatepicker]="picker" [id]="field.name" [(ngModel)]="data[field.name]" [name]="field.name" [required]="field.required">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </ng-container>
             <!-- Para campos de seleção -->
             <mat-select *ngSwitchCase="'select'" [id]="field.name" [(ngModel)]="data[field.name]" [name]="field.name" [required]="field.required">
               <mat-option *ngFor="let option of field.options" [value]="option">{{ option }}</mat-option>

@@ -37,4 +37,36 @@ mat-toolbar {
     margin-top: 20px;
     width: 100%; /* Ocupa toda a largura disponível */
   }
+  /* .register-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+  }
   
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  .date-field-container {
+    display: flex;
+    align-items:left;
+  }
+  
+  .date-field-container mat-form-field {
+    flex: 1;
+  }
+  
+  .date-field-container mat-datepicker-toggle {
+    margin-left: 8px;
+  } */
