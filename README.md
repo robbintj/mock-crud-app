@@ -42,7 +42,12 @@ Este é o projeto MKS, uma aplicação completa que inclui um frontend em Angula
 1. **Configuração do Banco de Dados:**
    - Certifique-se de que o PostgreSQL está instalado e em execução.
    - Crie o banco de dados necessário para o projeto.
-   - Atualize o arquivo `application.properties` com as credenciais e detalhes do banco de dados.
+   - Atualize o arquivo `application.properties` com as credenciais e detalhes do banco de dados:
+     ```properties
+     spring.datasource.url=jdbc:postgresql://localhost:5432/nome_do_banco
+     spring.datasource.username=postgres
+     spring.datasource.password=dev23
+     ```
 
 2. **Executar o Backend:**
    - Navegue até o diretório do backend.
@@ -73,9 +78,39 @@ Este é o projeto MKS, uma aplicação completa que inclui um frontend em Angula
 - **Acesso à Documentação:**
   - Após iniciar o backend, a documentação Swagger pode ser acessada em `http://localhost:8080/swagger-ui.html`.
 
-## Tabelas do Banco de Dados 🗄️
+## Acesso ao Banco de Dados 🗄️
 
-### Tabela `overlay`
+### Conectar ao Banco de Dados PostgreSQL
+
+Para se conectar ao banco de dados PostgreSQL, você pode usar o pgAdmin ou a linha de comando com `psql`.
+
+#### Usando pgAdmin
+
+1. **Abrir pgAdmin:** Abra o pgAdmin a partir de sua área de trabalho ou menu de aplicações.
+2. **Conectar ao Servidor:**
+   - Clique com o botão direito em "Servers" e selecione "Create" -> "Server".
+   - Preencha as informações do servidor:
+     - **Nome:** (Escolha um nome para o servidor)
+     - **Host:** `localhost`
+     - **Port:** `5432` (ou a porta configurada)
+     - **Maintenance database:** `postgres`
+     - **Username:** `postgres`
+     - **Password:** `dev23`
+   - Clique em "Save" para adicionar o servidor e conectar-se.
+
+#### Usando a Linha de Comando
+
+1. **Abrir o Terminal:** Abra o Terminal no macOS.
+2. **Conectar ao Banco de Dados:**
+   - Use o comando `psql` para se conectar ao banco de dados:
+     ```bash
+     psql -U postgres -h localhost -d nome_do_banco
+     ```
+   - Substitua `nome_do_banco` pelo nome do banco de dados que você criou.
+
+### Estrutura das Tabelas
+
+#### Tabela `overlay`
 
 ```sql
 CREATE TABLE overlay (
@@ -108,18 +143,3 @@ CREATE TABLE overlay (
     observacaoMKS TEXT,
     observacaoParceiro TEXT
 );
-
-CREATE TABLE usuarios (
-    id SERIAL PRIMARY KEY,
-    usuario VARCHAR(255) UNIQUE NOT NULL,
-    senha VARCHAR(255) NOT NULL,
-    nivel VARCHAR(255) NOT NULL
-);
-
--- Inserir usuários
-INSERT INTO usuarios (usuario, senha, nivel) VALUES
-('operador', '123', '3'),
-('admin', 'admin', '1'),
-('supervisor', '456', '2');
-
-
