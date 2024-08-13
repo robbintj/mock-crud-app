@@ -321,7 +321,13 @@ public class Overlay {
 
     @PrePersist
     @PreUpdate
-    public void generateIdProduto() {
+    public void prePersistOrUpdate() {
+        generateIdProduto();
+        calculateDimensions();
+        determineStatus();
+    }
+
+    private void generateIdProduto() {
         if (local != null && paredeFornalha != null && id != null) {
             idProduto = String.format("%s%s%d",
                     local.substring(0, 2).toUpperCase(),
@@ -330,9 +336,7 @@ public class Overlay {
         }
     }
 
-    @PrePersist
-    @PreUpdate
-    public void calculateDimensions() {
+    private void calculateDimensions() {
         if ("TUBO".equals(local)) {
             dimensao = (elevacaoSuperior - elevacaoInferior) + 100;
             numeroTuboAdjacente = "TUBO" + (numeroTubo + 1);
@@ -342,9 +346,7 @@ public class Overlay {
         }
     }
 
-    @PrePersist
-    @PreUpdate
-    public void determineStatus() {
+    private void determineStatus() {
         if (idProduto != null && paredeFornalha != null && local != null &&
                 numeroTubo != 0 && numeroTuboAdjacente != null && elevacaoInferior != 0 &&
                 elevacaoSuperior != 0 && dimensao != 0 && escopo != null && lado != null &&
@@ -363,4 +365,7 @@ public class Overlay {
             status = "PENDENTE";
         }
     }
+
+
+
 }
