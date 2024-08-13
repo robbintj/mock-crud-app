@@ -1,13 +1,7 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
-
 # Compiled output
 /dist
-/tmp
-/out-tsc
-/bazel-out
 
 # Node
-mks-backend/*
 /node_modules/
 npm-debug.log
 yarn-error.log
@@ -41,5 +35,3 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
-/mks-backend/mks/
-*.java
