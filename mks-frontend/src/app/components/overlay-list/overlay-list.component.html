@@ -1,0 +1,36 @@
+<div class="container">
+    <button mat-raised-button color="primary" (click)="addOverlay()">Add Overlay</button>
+  
+    <table mat-table [dataSource]="overlays" class="mat-elevation-z8">
+      <!-- ID Produto Column -->
+      <ng-container matColumnDef="idProduto">
+        <th mat-header-cell *matHeaderCellDef> ID Produto </th>
+        <td mat-cell *matCellDef="let overlay"> {{overlay.idProduto}} </td>
+      </ng-container>
+  
+      <!-- Parede Fornalha Column -->
+      <ng-container matColumnDef="paredeFornalha">
+        <th mat-header-cell *matHeaderCellDef> Parede Fornalha </th>
+        <td mat-cell *matCellDef="let overlay"> {{overlay.paredeFornalha}} </td>
+      </ng-container>
+  
+      <!-- Local Column -->
+      <ng-container matColumnDef="local">
+        <th mat-header-cell *matHeaderCellDef> Local </th>
+        <td mat-cell *matCellDef="let overlay"> {{overlay.local}} </td>
+      </ng-container>
+  
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let overlay">
+          <button mat-button (click)="editOverlay(overlay.id)">Edit</button>
+          <button mat-button color="warn" (click)="deleteOverlay(overlay.id)">Delete</button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  

@@ -1,22 +1,28 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideRouter, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { AppComponent } from './app/app.component';
-import { LoginComponent } from './app/login/login.component';
-import { RegisterComponent } from './app/register/register.component';
+import { authInterceptor } from './app/interceptors/auth.interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { RouterModule, Routes } from '@angular/router';
+import { importProvidersFrom } from '@angular/core';
+import { LoginComponent } from './app/components/login/login.component'; 
+import { OverlayListComponent } from './app/components/overlay-list/overlay-list.component';
+import { OverlayFormComponent } from './app/components/overlay-form/overlay-form.component';
 
-// Defina as rotas
+
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'overlays', component: OverlayListComponent },
+  { path: 'overlays/new', component: OverlayFormComponent },
+  { path: 'overlays/edit/:id', component: OverlayFormComponent },
+  { path: '**', redirectTo: '/login' }
 ];
 
-// Bootstrap da aplicação
 bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(routes),  // Configurar roteamento
-    FormsModule, provideAnimationsAsync()
+    importProvidersFrom(RouterModule.forRoot(routes)), // Adiciona suporte a rotas
+    provideHttpClient(withInterceptorsFromDi()), // Atualize para usar withInterceptorsFromDi
+    provideAnimationsAsync(), provideAnimationsAsync()
   ]
-}).catch(err => console.error('Bootstrap error:', err));
+}).catch(err => console.error(err));
